@@ -107,6 +107,7 @@ jobs:
           SLACK_CHANNEL: github
           SLACK_USERNAME: GithubActionsBot
           SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://${{secrets.SURGE_DOMAIN }}/images/GitHub-Mark-64px.png
           SLACK_TITLE: Workflow status of ${{github.repository}}
           SLACK_MESSAGE: 1) Build-job - ${{needs.Build-job.result}} 2) Test-job - ${{needs.Test-job.result}} 3) Deploy-job - ${{needs.Deploy-job.result}} 4) Post-deploy-job - ${{needs.Post-deploy-job.result}}
 
