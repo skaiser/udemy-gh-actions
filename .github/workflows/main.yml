@@ -80,6 +80,7 @@ jobs:
         with: 
           server_address: smtp.gmail.com
           server_port: 587
+          # Results in "ssl3_get_record:wrong version number" error ¯\_(ツ)_/¯
           # secure: true
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
