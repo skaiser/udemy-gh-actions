@@ -80,7 +80,7 @@ jobs:
         with: 
           server_address: smtp.gmail.com
           server_port: 587
-          secure: true
+          # secure: true
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           subject: Github Actions job result
