@@ -68,11 +68,11 @@ jobs:
         uses: actions/download-artifact@v3
       - name: SonarCloud scan
         uses: sonarsource/sonarcloud-github-action@master
-        # with:
+        with:
         #   projectBaseDir: my-custom-directory
-            # args: >
-            #   -Dsonar.organization=my-organization
-            #   -Dsonar.projectKey=my-projectkey
+            args: >
+              -Dsonar.organization=skaiser
+              -Dsonar.projectKey=udemy-gh-actions
             #   -Dsonar.python.coverage.reportPaths=coverage.xml
             #   -Dsonar.sources=lib/
             #   -Dsonar.test.exclusions=tests/**
