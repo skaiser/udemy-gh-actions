@@ -1,0 +1,11 @@
+    name: "Custom workflows"
+    on: ["push"]
+    jobs:
+      build:
+        runs-on: "ubuntu-latest"
+        steps:
+          - uses: "actions/checkout@master"
+          - name: "TODO to Issue"
+            # https://github.com/marketplace/actions/todo-to-issue
+            uses: "alstr/todo-to-issue-action@v4"
+            id: "todo"
