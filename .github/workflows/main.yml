@@ -21,6 +21,8 @@ jobs:
         with:
           # node-version: ${{ matrix.node-version }}
           node-version: '16.x'
+      # TODO: Cache node_modules
+      # https://github.com/marketplace/actions/cache
       - run: npm install
       - run: npm run build
 
