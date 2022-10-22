@@ -75,7 +75,6 @@ jobs:
     needs: [Build-job, Test-job, Deploy-job, Post-deploy-job]
     if: always()
     steps:
-      # https://github.com/marketplace/actions/send-email
       - uses: dawidd6/action-send-mail@v3
       - name: Send mail
         with: 
