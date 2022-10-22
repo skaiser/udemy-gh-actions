@@ -21,7 +21,7 @@ jobs:
         with:
           # node-version: ${{ matrix.node-version }}
           node-version: '16.x'
-      - run: npm install -g gatsby
+      - run: npm install -g gatsby-cli
       - run: npm run build
 
   Test-job:
