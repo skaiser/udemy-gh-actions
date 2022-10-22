@@ -23,6 +23,7 @@ jobs:
           node-version: '16.x'
       # TODO: Cache node_modules
       # https://github.com/marketplace/actions/cache
+      # https://github.com/actions/cache/blob/main/examples.md#node---npm
       - run: npm install
       - run: npm run build
 
@@ -67,6 +68,28 @@ jobs:
           node-version: '16.x'
       - run: sudo apt install curl
       - run: curl -s -N "https://${{secrets.SURGE_DOMAIN }}" | grep "Congratulations"
+
+  Notify-on-email:
+    runs-on: ubuntu-latest
+    name: EmailNotify
+    needs: [Build-job, Test-job, Deploy-job, Post-deploy-job]
+    if: always()
+    steps:
+      - name: Send mail
+      # https://github.com/marketplace/actions/send-email
+      - uses: dawidd6/action-send-mail@v3
+        with: 
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: true
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Github Actions job result
+          to: ${{secrets.MAIL_ADDRESS_PRIMARY}}
+          from: Mixt Media Art
+          body: Workflow status of ${{github.repository}} 1) Build-job - ${{needs.Build-job.result}} 2) Test-job - ${{needs.Test-job.result}} 3) Deploy-job - ${{needs.Deploy-job.result}} 4) Post-deploy-job - ${{needs.Post-deploy-job.result}}
+          # html_body: file://README.html
+          priority: low
 
 
       
