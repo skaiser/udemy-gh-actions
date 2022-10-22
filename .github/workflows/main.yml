@@ -76,7 +76,7 @@ jobs:
     if: always()
     steps:
       - uses: dawidd6/action-send-mail@v3
-      - name: Send mail
+        name: Send mail
         with: 
           server_address: smtp.gmail.com
           server_port: 587
