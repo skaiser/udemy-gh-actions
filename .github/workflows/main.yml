@@ -72,7 +72,7 @@ jobs:
         #   projectBaseDir: my-custom-directory
             args: >
               -Dsonar.organization=skaiser
-              -Dsonar.projectKey=udemy-gh-actions
+              -Dsonar.projectKey=skaiser_udemy-gh-actions
             #   -Dsonar.python.coverage.reportPaths=coverage.xml
             #   -Dsonar.sources=lib/
             #   -Dsonar.test.exclusions=tests/**
