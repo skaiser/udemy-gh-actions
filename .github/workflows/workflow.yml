@@ -1,11 +1,31 @@
-    name: "Custom workflows"
-    on: ["push"]
-    jobs:
-      build:
-        runs-on: "ubuntu-latest"
-        steps:
-          - uses: "actions/checkout@master"
-          - name: "TODO to Issue"
-            # https://github.com/marketplace/actions/todo-to-issue
-            uses: "alstr/todo-to-issue-action@v4"
-            id: "todo"
+name: "Custom workflows"
+on: ["push"]
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@master"
+      - name: "TODO to Issue"
+        # https://github.com/marketplace/actions/todo-to-issue
+        uses: "alstr/todo-to-issue-action@v4"
+        id: "todo"
+
+  # Jira-create-todo:
+  #   runs-on: "ubuntu-latest"
+  #   name: Jira TODO
+  #   steps:
+  #     - name: Login
+  #       uses: atlassian/gajira-login@master
+  #       env:
+  #         JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+  #         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+  #         JIRA_API_TOKEN: ${{ secrets.JIRA_TOKEN }}
+
+  #     - name: Jira TODO to Issue
+  #       uses: atlassian/gajira-todo@master
+  #       with:
+  #         project: LEAR
+  #         issuetype: Task
+  #         description: Created automatically via GitHub Actions
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
