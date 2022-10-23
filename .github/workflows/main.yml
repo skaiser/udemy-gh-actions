@@ -102,7 +102,7 @@ jobs:
   Notify-on-email:
     runs-on: ubuntu-latest
     name: EmailNotify
-    needs: [Build-job, Test-job, Deploy-job, Post-deploy-job]
+    needs: [Build-job, Test-job, Deploy-job, Post-deploy-job, sonartest]
     if: always()
     steps:
       - uses: dawidd6/action-send-mail@v3
@@ -117,7 +117,7 @@ jobs:
           subject: Github Actions job result
           to: ${{secrets.MAIL_ADDRESS_PRIMARY}}
           from: Mixt Media Art
-          body: Workflow status of ${{github.repository}} 1) Build-job - ${{needs.Build-job.result}} 2) Test-job - ${{needs.Test-job.result}} 3) Deploy-job - ${{needs.Deploy-job.result}} 4) Post-deploy-job - ${{needs.Post-deploy-job.result}}
+          body: Workflow status of ${{github.repository}} 1) Build-job - ${{needs.Build-job.result}} 2) Test-job - ${{needs.Test-job.result}} 3) Deploy-job - ${{needs.Deploy-job.result}} 4) Post-deploy-job - ${{needs.Post-deploy-job.result}} 5) SonarCloud - ${{needs.sonartest.result}}
           # html_body: file://README.html
           priority: low
 
@@ -125,7 +125,7 @@ jobs:
   Notify-on-slack:
     runs-on: ubuntu-latest
     name: SlackNotify
-    needs: [Build-job, Test-job, Deploy-job, Post-deploy-job]
+    needs: [Build-job, Test-job, Deploy-job, Post-deploy-job, sonartest]
     if: always()
     steps:
       - uses: actions/checkout@v2
@@ -139,7 +139,7 @@ jobs:
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://${{secrets.SURGE_DOMAIN }}/images/GitHub-Mark-64px.png
           SLACK_TITLE: Workflow status of ${{github.repository}}
-          SLACK_MESSAGE: 1) Build-job - ${{needs.Build-job.result}} 2) Test-job - ${{needs.Test-job.result}} 3) Deploy-job - ${{needs.Deploy-job.result}} 4) Post-deploy-job - ${{needs.Post-deploy-job.result}}
+          SLACK_MESSAGE: 1) Build-job - ${{needs.Build-job.result}} 2) Test-job - ${{needs.Test-job.result}} 3) Deploy-job - ${{needs.Deploy-job.result}} 4) Post-deploy-job - ${{needs.Post-deploy-job.result}} 5) SonarCloud - ${{needs.sonartest.result}}
 
 
       
