@@ -19,25 +19,33 @@ jobs:
     name: Making Build
     steps:
       - uses: actions/checkout@v3
-      - name: Install Surge
+      - name: Build Gatsby Site
         uses: actions/setup-node@v3
         with:
           # node-version: ${{ matrix.node-version }}
           node-version: '16.x'
+      # This doesn't work: The engine "node" is incompatible with this module.
+      # - uses: actions/checkout@master
+      # - name: Build Gatsby Site
+      #   uses: jzweifel/gatsby-cli-github-action@master
+      #   # env:
+      #   #   GATSBY_PROJECT_PATH: "./site"
+      #   with:
+      #     gatsby-arg: build
+      - run: npm install
+      - run: npm run build
       # TODO: Cache node_modules
       # https://github.com/marketplace/actions/cache
       # https://github.com/actions/cache/blob/main/examples.md#node---npm
-      - run: npm install
-      - run: npm run build
 
   Test-job:
     runs-on: ubuntu-latest
-    name: Simple tests
+    name: Run tests
     needs: Build-job
-    if: github.ref != 'refs/head/production'
+    if: ${{ github.ref != 'refs/head/production' }}
     steps:
       - uses: actions/checkout@v3
-      - name: Run simple tests
+      - name: Run unit tests
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
@@ -46,8 +54,9 @@ jobs:
 
   Deploy-job:
     runs-on: ubuntu-latest
-    # needs: [Test-job]
+    needs: [Test-job]
     name: Deploy to Surge
+    # TODO: Switch to 'production'
     if: ${{ github.ref_name == 'main' }}
     steps:
       - uses: actions/checkout@v3
